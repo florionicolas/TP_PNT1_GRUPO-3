@@ -1,0 +1,1 @@
+Desarrollar una página web de Álbum de Figuritas Online que permita a los usuarios crear y administrar su perfil, registrar y gestionar las figuritas que poseen, y realizar intercambios de figuritas con otros usuarios de manera sencilla e interactiva.
