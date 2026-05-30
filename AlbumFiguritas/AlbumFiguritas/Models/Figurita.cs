@@ -12,7 +12,7 @@
 
         public string? NombreJugador { get; set; }
 
-        public string? Seleccion {  get; set; }
+        public Pais Seleccion {  get; set; }
 
         public string? UrlFotoJugador { get; set; }
 
