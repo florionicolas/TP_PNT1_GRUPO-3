@@ -2,11 +2,13 @@
 {
     public class UsuarioFigurita
     {
-        private int Id { get; set; }
-        private int UsuarioId {  get; set; }
+        public int Id { get; set; }
 
-        private int FiguritaId { get; set; }
+        public int UsuarioId {  get; set; }
 
-        private int Cantidad { get; set; }
+        public int FiguritaId { get; set; }
+
+        public int Cantidad { get; set; }
+        public EstadoFigurita Estado { get; set; }
     }
 }

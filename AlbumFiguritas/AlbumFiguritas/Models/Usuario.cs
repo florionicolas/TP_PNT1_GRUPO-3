@@ -9,15 +9,13 @@
         // Usar "?" cuando el atributo pueda no tener valor (null) 
         // Inicializar cuando el atributo deba existir obligatoriamente en el sistema y no debería ser null.
 
-        private int Id { get; set;  }
+        public int Id { get; set; }
+        public string? NombreUsuario { get; set; }
+        public string? Email { get; set; }
+        public string? Password { get; set; }
+        public NivelPermiso Permiso { get; set; }
 
-        private string? NombreUsuario { get; set; }
-
-        private string? Email { get; set; }
-
-        private string? Password { get; set; }
-
-        private string? Rol {  get; set; }
+        public List<UsuarioFigurita> MiAlbum { get; set; } = new List<UsuarioFigurita>();
 
     }
 }
