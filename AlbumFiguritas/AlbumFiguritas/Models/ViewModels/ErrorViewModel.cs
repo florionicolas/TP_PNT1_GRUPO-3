@@ -1,4 +1,4 @@
-namespace AlbumFiguritas.Models
+namespace AlbumFiguritas.Models.ViewModels
 {
     public class ErrorViewModel
     {
