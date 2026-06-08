@@ -9,6 +9,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AlbumDatabaseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConexionLocal")));
 
+// Permite almacenar información del usuario durante la sesión activa.
+builder.Services.AddSession();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -21,6 +24,9 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+
+// Habilita el uso de Session en toda la aplicación.
+app.UseSession();
 
 app.UseAuthorization();
 

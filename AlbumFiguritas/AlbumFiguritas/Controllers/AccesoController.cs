@@ -1,5 +1,6 @@
 ﻿using AlbumFiguritas.Context;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace AlbumFiguritas.Controllers
 {
@@ -25,10 +26,20 @@ namespace AlbumFiguritas.Controllers
             
             if (usuarioEncontrado != null)
             {
+                //Guarda el Id del user logueado para identificarlo en funcionalidades como: Mi Album, Intercambios y Perfil.
+                HttpContext.Session.SetInt32("UsuarioId",usuarioEncontrado.Id);
                 TempData["NombreUsuarioLogueado"] = usuarioEncontrado.NombreUsuario;
-            }
 
             return RedirectToAction("Index", "Home");
+            
+            }
+            // Si las credenciales son incorrectas,
+            // vuelve a mostrar la pantalla de Login.
+            ModelState.AddModelError(
+                string.Empty,
+                "Email o contraseña incorrectos.");
+
+            return View();
         }
 
         [HttpGet]
