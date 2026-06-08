@@ -52,10 +52,22 @@ public class FiguritaController : Controller
     {
         if (ModelState.IsValid)
         {
+            bool existeNumero = await _context.Figuritas
+                .AnyAsync(f => f.Numero == figurita.Numero);
+
+            if (existeNumero)
+            {
+                ModelState.AddModelError("Numero",
+                    "Ya existe una figurita con ese número.");
+
+                return View(figurita);
+            }
+
             _context.Add(figurita);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
         return View(figurita);
     }
 
