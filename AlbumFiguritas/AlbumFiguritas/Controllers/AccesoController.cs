@@ -23,15 +23,22 @@ namespace AlbumFiguritas.Controllers
         public IActionResult Login(string email, string password)
         {
             var usuarioEncontrado = _context.Usuarios.FirstOrDefault(u => u.Email == email && u.Password == password);
-            
+
             if (usuarioEncontrado != null)
             {
+
                 //Guarda el Id del user logueado para identificarlo en funcionalidades como: Mi Album, Intercambios y Perfil.
                 HttpContext.Session.SetInt32("UsuarioId",usuarioEncontrado.Id);
+                HttpContext.Session.SetString("RolUsuario", usuarioEncontrado.Permiso.ToString());
                 TempData["NombreUsuarioLogueado"] = usuarioEncontrado.NombreUsuario;
 
-            return RedirectToAction("Index", "Home");
-            
+                if (usuarioEncontrado.Permiso.ToString() == "ADMINISTRADOR")
+                { return RedirectToAction("Index", "Home");} 
+                else
+                { return RedirectToAction("MiAlbum", "Album");
+                }
+
+
             }
             // Si las credenciales son incorrectas,
             // vuelve a mostrar la pantalla de Login.
@@ -59,6 +66,15 @@ namespace AlbumFiguritas.Controllers
             // Aquí iría la lógica para registrar al usuario en la base de datos
             // Por ejemplo: _userService.Register(username, password);
             return RedirectToAction("Registro");
+        }
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            // Limpia todas las variables guardadas en la sesión actual (UsuarioId, RolUsuario, etc.)
+            HttpContext.Session.Clear();
+
+            // Redirige a la pantalla de Login (Asegúrate de poner el nombre correcto de tu controlador)
+            return RedirectToAction("Login");
         }
     }
 
