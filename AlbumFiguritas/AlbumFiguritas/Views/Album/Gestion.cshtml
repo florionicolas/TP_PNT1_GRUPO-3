@@ -1,1 +1,59 @@
-﻿
+﻿@model List<AlbumFiguritas.Models.Figurita>
+
+@{
+    ViewData["Title"] = "Gestionar Álbum";
+}
+
+<div class="container mt-4">
+
+    <h2>Gestionar Álbum</h2>
+
+    <hr />
+
+    <!-- Buscador -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Buscar por nombre o número de figurita..." />
+        </div>
+
+        <div class="col-md-4">
+            <button class="btn boton-celeste w-100">
+                Buscar
+            </button>
+        </div>
+    </div>
+
+    <!-- Resultados -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Número</th>
+                <th>Jugador</th>
+                <th>Selección</th>
+                <th>Cantidad</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var figurita in Model)
+            {
+                <tr>
+                    <td>@figurita.Numero</td>
+                    <td>@figurita.NombreJugador</td>
+                    <td>@figurita.Seleccion</td>
+                    <td>0</td>
+
+                    <td>
+                        <button class="btn btn-success">+</button>
+                        <button class="btn btn-danger">-</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+</div>
