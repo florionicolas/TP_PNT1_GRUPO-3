@@ -10,20 +10,62 @@
 
     <hr />
 
-    <!-- Buscador -->
+    <form asp-action="Gestion" method="get">
+
+    <!-- Buscador y filtros -->
     <div class="row mb-4">
-        <div class="col-md-8">
+
+        <!-- Buscar por nombre o número -->
+        <div class="col-md-5">
             <input type="text"
+                   name="busqueda"
+                   value="@ViewBag.Busqueda"
                    class="form-control"
-                   placeholder="Buscar por nombre o número de figurita..." />
+                   placeholder="Buscar jugador o número..." />
         </div>
 
+        <!-- Filtro por selección -->
         <div class="col-md-4">
-            <button class="btn boton-celeste w-100">
+                <select name="seleccion" class="form-select">
+
+                    <option value=""
+                            selected="@(string.IsNullOrEmpty(ViewBag.Seleccion))">
+                        Todas las selecciones
+                    </option>
+
+                    <option value="Argentina"
+                            selected="@(ViewBag.Seleccion == "Argentina")">
+                        Argentina
+                    </option>
+
+                    <option value="Brasil"
+                            selected="@(ViewBag.Seleccion == "Brasil")">
+                        Brasil
+                    </option>
+
+                    <option value="Francia"
+                            selected="@(ViewBag.Seleccion == "Francia")">
+                        Francia
+                    </option>
+
+                    <option value="Inglaterra"
+                            selected="@(ViewBag.Seleccion == "Inglaterra")">
+                        Inglaterra
+                    </option>
+
+                </select>
+        </div>
+
+        <!-- Botón buscar -->
+        <div class="col-md-3">
+            <button type="submit" class="btn boton-celeste w-100">
                 Buscar
             </button>
         </div>
+
     </div>
+
+    </form>
 
     <!-- Resultados -->
     <table class="table table-striped">
