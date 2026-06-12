@@ -15,7 +15,7 @@
     <!-- Buscador y filtros -->
     <div class="row mb-4">
 
-        <!-- Buscar por nombre o número -->
+        <!-- Buscar por nom6re o número -->
         <div class="col-md-5">
             <input type="text"
                    name="busqueda"
@@ -25,7 +25,7 @@
         </div>
 
         <!-- Filtro por selección -->
-        <div class="col-md-4">
+        <div class="col-md-3">
                 <select name="seleccion" class="form-select">
 
                     <option value=""
@@ -57,18 +57,26 @@
         </div>
 
         <!-- Botón buscar -->
-        <div class="col-md-3">
+        <div class="col-md-2">
             <button type="submit" class="btn boton-celeste w-100">
-                Buscar
+                    Buscar
             </button>
         </div>
+
+            <!-- Botón eliminar filtro-->
+            <div class="col-md-2">
+                <a asp-action="Gestion"
+                   class="btn btn-secondary boton-filtro w-100">
+                    Reiniciar
+                </a>
+            </div>
 
     </div>
 
     </form>
 
     <!-- Resultados -->
-    <table class="table table-striped">
+    <table class="table table-striped tabla-figuritas">
         <thead>
             <tr>
                 <th>Número</th>

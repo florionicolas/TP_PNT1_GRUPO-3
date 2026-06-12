@@ -33,3 +33,11 @@ body {
     background-color: cornflowerblue;
     font-size: 13px
 }
+
+.boton-filtro {
+    font-size: 13px;
+}
+
+.tabla-figuritas {
+    table-layout: fixed;
+}
