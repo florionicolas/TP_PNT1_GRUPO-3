@@ -1,6 +1,8 @@
 ﻿using AlbumFiguritas.Context;
 using AlbumFiguritas.Models;
+using AlbumFiguritas.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AlbumFiguritas.Controllers
 {
@@ -133,11 +135,53 @@ namespace AlbumFiguritas.Controllers
         [HttpGet]
         public IActionResult MiAlbum()
         {
-            // Replicamos el control de seguridad para asegurarnos que el usuario esté logueado antes de mostrar su álbum
             int? usuarioIdLogueado = HttpContext.Session.GetInt32("UsuarioId");
             if (usuarioIdLogueado == null) return RedirectToAction("Login", "Acceso");
 
-            return View();
+            // 1. Obtener tamaño total del álbum (el catálogo completo)
+            int totalFiguritasCatalogo = _context.Figuritas.Count();
+
+            // 2. Obtener las figuritas que el usuario posee, cruzando con la tabla Figuritas (Include)
+            var misFiguritas = _context.UsuarioFiguritas
+                .Include(uf => uf.Figurita)
+                .Where(uf => uf.UsuarioId == usuarioIdLogueado.Value)
+                .ToList();
+
+            // 3. Cálculos lógicos
+            // Cuántos jugadores únicos tengo (cada fila es un jugador distinto)
+            int unicasObtenidas = misFiguritas.Count;
+
+            // Cuántas me faltan para completar el álbum
+            int faltantes = totalFiguritasCatalogo - unicasObtenidas;
+
+            // Cuántas figuritas físicas me sobran para intercambiar
+            // (Ej: Si Cantidad es 1, sobra 0. Si Cantidad es 3, sobran 2)
+            int repetidas = misFiguritas.Sum(uf => uf.Cantidad - 1);
+
+            // Regla de 3 simple para el porcentaje (Se castea a double para tener precisión)
+            double porcentaje = 0;
+            if (totalFiguritasCatalogo > 0)
+            {
+                porcentaje = Math.Round(((double)unicasObtenidas / totalFiguritasCatalogo) * 100, 1);
+            }
+
+            // 4. Últimas 4 figuritas agregadas (Ordenamos por ID descendente)
+            var recientes = misFiguritas
+                .OrderByDescending(uf => uf.Id)
+                .Take(4)
+                .ToList();
+
+            // 5. Empaquetar y enviar a la vista
+            var viewModel = new MiAlbumViewModel
+            {
+                TotalObtenidas = unicasObtenidas,
+                TotalFaltantes = faltantes,
+                TotalRepetidas = repetidas,
+                PorcentajeCompletado = porcentaje,
+                AgregadasRecientemente = recientes
+            };
+
+            return View(viewModel);
         }
     }
 }

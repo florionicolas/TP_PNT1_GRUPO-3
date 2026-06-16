@@ -18,6 +18,8 @@ html {
 }
 
 body {
+    background-color: #1a2a3a;
+    color: #ffffff;
     margin-bottom: 60px;
     font-size: 16px;
     font-family: Arial, Helvetica, sans-serif;
@@ -41,3 +43,52 @@ body {
 .tabla-figuritas {
     table-layout: fixed;
 }
+
+/*Estilo de dashboard*/
+
+.dashboard-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Barra de progreso custom */
+.progress-custom {
+    height: 35px;
+    background-color: #111111;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.progress-bar-custom {
+    background-color: #4CAF50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* Círculos de estadísticas */
+.stat-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin: 0 auto;
+    border: 4px solid transparent;
+}
+
+.circle-green {
+    border-color: #4CAF50;
+}
+
+.circle-pink {
+    border-color: #FF8A80;
+}
+
+.circle-yellow {
+    border-color: #FFB300;
+}
+/*Fin de estilo de dashboard*/
