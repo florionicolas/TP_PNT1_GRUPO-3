@@ -14,7 +14,7 @@ namespace AlbumFiguritas.Controllers
         }
 
         [HttpGet]
-        public IActionResult Gestion(string? busqueda, string? seleccion)
+        public IActionResult Gestion(string? busqueda, string? seleccion, string? estado)
         {
             // 1. CONTROL DE SEGURIDAD: Intentamos leer el ID desde la sesión
             int? usuarioIdLogueado = HttpContext.Session.GetInt32("UsuarioId");
@@ -44,14 +44,41 @@ namespace AlbumFiguritas.Controllers
                 }
             }
 
-            ViewBag.Busqueda = busqueda;
-            ViewBag.Seleccion = seleccion;
+            // 4. FILTRO DE ESTADO (Calculado dinámicamente)
+            if (!string.IsNullOrWhiteSpace(estado))
+            {
+                // Traemos las relaciones del usuario logueado
+                var misRelaciones = _context.UsuarioFiguritas
+                                            .Where(uf => uf.UsuarioId == usuarioIdLogueado.Value);
 
-            // 3. CONSULTA DINÁMICA: Usamos el ID de la sesión (.Value porque es un tipo Nullable)
+                if (estado == "FALTANTE")
+                {
+                    // Las que NO están en mi lista de relaciones
+                    var misIds = misRelaciones.Select(uf => uf.FiguritaId).ToList();
+                    figuritas = figuritas.Where(f => !misIds.Contains(f.Id));
+                }
+                else if (estado == "OBTENIDA")
+                {
+                    // Las que están en mi lista con Cantidad == 1
+                    var obtenidasIds = misRelaciones.Where(uf => uf.Cantidad == 1).Select(uf => uf.FiguritaId).ToList();
+                    figuritas = figuritas.Where(f => obtenidasIds.Contains(f.Id));
+                }
+                else if (estado == "DUPLICADA")
+                {
+                    // Las que están en mi lista con Cantidad > 1
+                    var duplicadasIds = misRelaciones.Where(uf => uf.Cantidad > 1).Select(uf => uf.FiguritaId).ToList();
+                    figuritas = figuritas.Where(f => duplicadasIds.Contains(f.Id));
+                }
+            }
+
+            // 5. CONSULTA DINÁMICA: Usamos el ID de la sesión (.Value porque es un tipo Nullable)
             var diccionarioCantidades = _context.UsuarioFiguritas
                 .Where(uf => uf.UsuarioId == usuarioIdLogueado.Value)
                 .ToDictionary(uf => uf.FiguritaId, uf => uf.Cantidad);
 
+            ViewBag.estado = estado;
+            ViewBag.Busqueda = busqueda;
+            ViewBag.Seleccion = seleccion;
             ViewBag.Cantidades = diccionarioCantidades;
 
             return View(figuritas.ToList());

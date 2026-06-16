@@ -16,7 +16,7 @@
     <div class="row mb-4">
 
         <!-- Buscar por nombre o número -->
-        <div class="col-md-5">
+        <div class="col-md-3">
             <input type="text"
                    name="busqueda"
                    value="@ViewBag.Busqueda"
@@ -56,6 +56,17 @@
                 </select>
         </div>
 
+        <!-- Filtrado por estado -->
+
+            <div class="col-md-2">
+                <select name="estado" class="form-select">
+                    <option value="" selected="@(string.IsNullOrEmpty(ViewBag.Estado))">Todos los estados</option>
+                    <option value="FALTANTE" selected="@(ViewBag.Estado == "FALTANTE")">Solo Faltantes</option>
+                    <option value="OBTENIDA" selected="@(ViewBag.Estado == "OBTENIDA")">Pegadas (Obtenidas)</option>
+                    <option value="DUPLICADA" selected="@(ViewBag.Estado == "DUPLICADA")">Duplicadas (Para cambiar)</option>
+                </select>
+            </div>
+
         <!-- Botón buscar -->
         <div class="col-md-2">
             <button type="submit" class="btn boton-celeste w-100">
@@ -63,13 +74,13 @@
             </button>
         </div>
 
-            <!-- Botón eliminar filtro-->
-            <div class="col-md-2">
-                <a asp-action="Gestion"
-                   class="btn btn-secondary boton-filtro w-100">
-                    Reiniciar
-                </a>
-            </div>
+        <!-- Botón eliminar filtro-->
+        <div class="col-md-2">
+            <a asp-action="Gestion"
+                class="btn btn-secondary boton-filtro w-100">
+                Reiniciar
+            </a>
+        </div>
 
     </div>
 
@@ -113,6 +124,7 @@
                                 <input type="hidden" name="cambio" value="1" />
                                 <input type="hidden" name="busqueda" value="@ViewBag.Busqueda" />
                                 <input type="hidden" name="seleccion" value="@ViewBag.Seleccion" />
+                                <input type="hidden" name="estado" value="@ViewBag.Estado" />
                                 <button type="submit" class="btn btn-sm btn-success px-3">+</button>
                             </form>
 
@@ -121,6 +133,7 @@
                                 <input type="hidden" name="cambio" value="-1" />
                                 <input type="hidden" name="busqueda" value="@ViewBag.Busqueda" />
                                 <input type="hidden" name="seleccion" value="@ViewBag.Seleccion" />
+                                <input type="hidden" name="estado" value="@ViewBag.Estado" />
                                 <button type="submit" class="btn btn-sm btn-danger px-3" @(cantidadReal <= 0 ? "disabled" : "")>-</button>
                             </form>
                         </div>
