@@ -9,6 +9,5 @@
         public int FiguritaId { get; set; }
 
         public int Cantidad { get; set; }
-        public EstadoFigurita Estado { get; set; }
     }
 }

@@ -79,7 +79,8 @@ namespace AlbumFiguritas.Controllers
                     {
                         UsuarioId = usuarioIdLogueado.Value,
                         FiguritaId = figuritaId,
-                        Cantidad = 1,
+                        Cantidad = 1
+
                     });
                 }
             }
