@@ -15,7 +15,7 @@
     <!-- Buscador y filtros -->
     <div class="row mb-4">
 
-        <!-- Buscar por nom6re o número -->
+        <!-- Buscar por nombre o número -->
         <div class="col-md-5">
             <input type="text"
                    name="busqueda"
@@ -90,15 +90,40 @@
         <tbody>
             @foreach (var figurita in Model)
             {
-                <tr>
-                    <td>@figurita.Numero</td>
-                    <td>@figurita.NombreJugador</td>
-                    <td>@figurita.Seleccion</td>
-                    <td>0</td>
+                // Usamos el diccionario pasado desde el controlador para obtener la cantidad real de cada figurita. Si no se encuentra, asumimos que es 0.
+                var diccionario = ViewBag.Cantidades as Dictionary<int, int>;
 
-                    <td>
-                        <button class="btn btn-success">+</button>
-                        <button class="btn btn-danger">-</button>
+                int cantidadReal = 0;
+                if (diccionario != null && diccionario.ContainsKey(figurita.Id))
+                {
+                    cantidadReal = diccionario[figurita.Id];
+                }
+
+                <tr>
+                    <td class="align-middle">@figurita.Numero</td>
+                    <td class="align-middle">@figurita.NombreJugador</td>
+                    <td class="align-middle">@figurita.Seleccion</td>
+
+                    <td class="align-middle fw-bold fs-5 text-center">@cantidadReal</td>
+
+                    <td class="align-middle">
+                        <div class="d-inline-flex gap-1">
+                            <form asp-action="ActualizarCantidad" method="post">
+                                <input type="hidden" name="figuritaId" value="@figurita.Id" />
+                                <input type="hidden" name="cambio" value="1" />
+                                <input type="hidden" name="busqueda" value="@ViewBag.Busqueda" />
+                                <input type="hidden" name="seleccion" value="@ViewBag.Seleccion" />
+                                <button type="submit" class="btn btn-sm btn-success px-3">+</button>
+                            </form>
+
+                            <form asp-action="ActualizarCantidad" method="post">
+                                <input type="hidden" name="figuritaId" value="@figurita.Id" />
+                                <input type="hidden" name="cambio" value="-1" />
+                                <input type="hidden" name="busqueda" value="@ViewBag.Busqueda" />
+                                <input type="hidden" name="seleccion" value="@ViewBag.Seleccion" />
+                                <button type="submit" class="btn btn-sm btn-danger px-3" @(cantidadReal <= 0 ? "disabled" : "")>-</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             }

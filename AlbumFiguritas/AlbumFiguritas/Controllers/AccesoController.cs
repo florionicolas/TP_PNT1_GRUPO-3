@@ -63,7 +63,7 @@ namespace AlbumFiguritas.Controllers
                 ModelState.AddModelError(string.Empty, "Las contraseñas no coinciden.");
                 return View();
             }
-            // Aquí iría la lógica para registrar al usuario en la base de datos
+            // Acá va la lógica para registrar al usuario en la base de datos
             // Por ejemplo: _userService.Register(username, password);
             return RedirectToAction("Registro");
         }
@@ -73,7 +73,7 @@ namespace AlbumFiguritas.Controllers
             // Limpia todas las variables guardadas en la sesión actual (UsuarioId, RolUsuario, etc.)
             HttpContext.Session.Clear();
 
-            // Redirige a la pantalla de Login (Asegúrate de poner el nombre correcto de tu controlador)
+            // Redirige a la pantalla de Login (Asegurarse de poner el nombre correcto de tu controlador)
             return RedirectToAction("Login");
         }
     }
