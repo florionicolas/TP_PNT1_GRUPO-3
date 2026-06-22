@@ -102,10 +102,20 @@ namespace AlbumFiguritas.Controllers
             };
 
             _context.SolicitudesIntercambio.Add(solicitud);
-            IntentarMatch(solicitud);
+
+            // CAMBIO: ahora guardamos si hubo match o no
+            bool huboMatch = IntentarMatch(solicitud);
+
             _context.SaveChanges();
 
-            TempData["Ok"] = "Solicitud creada correctamente.";
+            if (huboMatch)
+            {
+                TempData["Ok"] = "¡Se realizó un intercambio exitosamente!";
+            }
+            else
+            {
+                TempData["Ok"] = "Solicitud creada correctamente.";
+            }
 
             return RedirectToAction("Gestion");
         }
@@ -148,7 +158,7 @@ namespace AlbumFiguritas.Controllers
             return View(model);
         }
 
-        private void IntentarMatch(SolicitudIntercambio nuevaSolicitud)
+        private bool IntentarMatch(SolicitudIntercambio nuevaSolicitud)
         {
             var match = _context.SolicitudesIntercambio
                 .FirstOrDefault(s =>
@@ -158,7 +168,7 @@ namespace AlbumFiguritas.Controllers
                     s.FiguritaSolicitadaId == nuevaSolicitud.FiguritaOfrecidaId);
 
             if (match == null)
-                return;
+                return false;
 
             var fecha = DateTime.Now;
 
@@ -182,6 +192,8 @@ namespace AlbumFiguritas.Controllers
                 match.UsuarioId,
                 match.FiguritaOfrecidaId,
                 match.FiguritaSolicitadaId);
+
+            return true; 
         }
 
         private void IntercambiarFiguritas(int usuarioId, int figuritaSale, int figuritaEntra)
