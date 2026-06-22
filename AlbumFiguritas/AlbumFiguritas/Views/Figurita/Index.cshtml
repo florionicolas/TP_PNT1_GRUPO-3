@@ -20,7 +20,7 @@
                     <div class="p-2 bg-secondary rounded-top">
                         @if (!string.IsNullOrEmpty(item.UrlFotoJugador))
                         {
-                            <img src="~/img/@(item.NombreJugador).png"
+                            <img src="~/@item.UrlFotoJugador"
                                  alt="Foto de @item.NombreJugador"
                                  class="card-img-top img-fluid rounded shadow-sm"
                                  style="width:150px;  height: 210px; object-fit: cover;"
