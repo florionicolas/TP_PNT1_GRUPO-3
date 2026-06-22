@@ -1,160 +1,1 @@
-
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using AlbumFiguritas.Models;
-using AlbumFiguritas.Context;
-
-public class FiguritaController : Controller
-{
-    private readonly AlbumDatabaseContext _context;
-
-    public FiguritaController(AlbumDatabaseContext context)
-    {
-        _context = context;
-    }
-
-    // GET: FIGURITAS
-    public async Task<IActionResult> Index()    
-    {
-        return View(await _context.Figuritas.ToListAsync());
-    }
-
-    // GET: FIGURITAS/Details/5
-    public async Task<IActionResult> Details(int? id)
-    {
-        if (id == null)
-        {
-            return NotFound();
-        }
-
-        var figurita = await _context.Figuritas
-            .FirstOrDefaultAsync(m => m.Id == id);
-        if (figurita == null)
-        {
-            return NotFound();
-        }
-
-        return View(figurita);
-    }
-
-    // GET: FIGURITAS/Create
-    public IActionResult Create()
-    {
-        return View();
-    }
-
-    // POST: FIGURITAS/Create
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Id,Numero,NombreJugador,Seleccion,UrlFotoJugador,UsuariosPoseen")] Figurita figurita)
-    {
-        if (ModelState.IsValid)
-        {
-            bool existeNumero = await _context.Figuritas
-                .AnyAsync(f => f.Numero == figurita.Numero);
-
-            if (existeNumero)
-            {
-                ModelState.AddModelError("Numero",
-                    "Ya existe una figurita con ese número.");
-
-                return View(figurita);
-            }
-
-            _context.Add(figurita);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        return View(figurita);
-    }
-
-    // GET: FIGURITAS/Edit/5
-    public async Task<IActionResult> Edit(int? id)
-    {
-        if (id == null)
-        {
-            return NotFound();
-        }
-
-        var figurita = await _context.Figuritas.FindAsync(id);
-        if (figurita == null)
-        {
-            return NotFound();
-        }
-        return View(figurita);
-    }
-
-    // POST: FIGURITAS/Edit/5
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int? id, [Bind("Id,Numero,NombreJugador,Seleccion,UrlFotoJugador,UsuariosPoseen")] Figurita figurita)
-    {
-        if (id != figurita.Id)
-        {
-            return NotFound();
-        }
-
-        if (ModelState.IsValid)
-        {
-            try
-            {
-                _context.Update(figurita);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!FiguritaExists(figurita.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-            return RedirectToAction(nameof(Index));
-        }
-        return View(figurita);
-    }
-
-    // GET: FIGURITAS/Delete/5
-    public async Task<IActionResult> Delete(int? id)
-    {
-        if (id == null)
-        {
-            return NotFound();
-        }
-
-        var figurita = await _context.Figuritas
-            .FirstOrDefaultAsync(m => m.Id == id);
-        if (figurita == null)
-        {
-            return NotFound();
-        }
-
-        return View(figurita);
-    }
-
-    // POST: FIGURITAS/Delete/5
-    [HttpPost, ActionName("Delete")]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteConfirmed(int? id)
-    {
-        var figurita = await _context.Figuritas.FindAsync(id);
-        if (figurita != null)
-        {
-            _context.Figuritas.Remove(figurita);
-        }
-
-        await _context.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
-    }
-
-    private bool FiguritaExists(int? id)
-    {
-        return _context.Figuritas.Any(e => e.Id == id);
-    }
-}
+ using Microsoft.AspNetCore.Mvc; using Microsoft.EntityFrameworkCore; using AlbumFiguritas.Models; using AlbumFiguritas.Context; using System.IO;  public class FiguritaController : Controller {     private readonly AlbumDatabaseContext _context;      public FiguritaController(AlbumDatabaseContext context)     {         _context = context;     }      // GET: FIGURITAS     public async Task<IActionResult> Index()         {         return View(await _context.Figuritas.ToListAsync());     }      // GET: FIGURITAS/Details/5     public async Task<IActionResult> Details(int? id)     {         if (id == null)         {             return NotFound();         }          var figurita = await _context.Figuritas             .FirstOrDefaultAsync(m => m.Id == id);         if (figurita == null)         {             return NotFound();         }          return View(figurita);     }      // GET: FIGURITAS/Create     public IActionResult Create()     {         return View();     }      // POST: FIGURITAS/Create     [HttpPost] [ValidateAntiForgeryToken] public async Task<IActionResult> Create([Bind("Id,Numero,NombreJugador,Seleccion")] Figurita figurita, IFormFile imagenArchivo) {     // 1. ELIMINAR DE LA VALIDACIÓN LOS CAMPOS QUE YA NO ENVIAMOS EN EL FORMULARIO     ModelState.Remove("UrlFotoJugador");     ModelState.Remove("UsuariosPoseen");      // 2. Ahora sí, verificamos si el resto de los datos (Nombre, Numero, etc.) son válidos     if (ModelState.IsValid)     {         if (imagenArchivo != null && imagenArchivo.Length > 0)         {             var carpetaDestino = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img");                          if (!Directory.Exists(carpetaDestino))             {                 Directory.CreateDirectory(carpetaDestino);             }              var extension = Path.GetExtension(imagenArchivo.FileName).ToLower();             string nombreFormateado = figurita.NombreJugador.Trim();             var nuevoNombreArchivo = $"{nombreFormateado}{extension}";             var rutaFisica = Path.Combine(carpetaDestino, nuevoNombreArchivo);              using (var stream = new FileStream(rutaFisica, FileMode.Create))             {                 await imagenArchivo.CopyToAsync(stream);             }              figurita.UrlFotoJugador = "img/" + nuevoNombreArchivo;         }         else          {             // Opcional: ¿Qué pasa si el usuario no sube imagen?              // Podrías asignarle una imagen por defecto o dejarlo nulo si tu base de datos lo permite.             // figurita.UrlFotoJugador = "img/default.png";         }          // Le asignamos un valor por defecto a UsuariosPoseen ya que lo quitamos de la vista         figurita.UsuariosPoseen = null;          _context.Add(figurita);         await _context.SaveChangesAsync();         return RedirectToAction(nameof(Index));     }          // Si sigue fallando, esto te devolverá a la vista para que veas el error     return View(figurita); }       // GET: FIGURITAS/Edit/5     public async Task<IActionResult> Edit(int? id)     {         if (id == null)         {             return NotFound();         }          var figurita = await _context.Figuritas.FindAsync(id);         if (figurita == null)         {             return NotFound();         }         return View(figurita);     }      // POST: FIGURITAS/Edit/5     // To protect from overposting attacks, enable the specific properties you want to bind to.     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.     [HttpPost]     [ValidateAntiForgeryToken]     public async Task<IActionResult> Edit(int? id, [Bind("Id,Numero,NombreJugador,Seleccion,UrlFotoJugador,UsuariosPoseen")] Figurita figurita)     {         if (id != figurita.Id)         {             return NotFound();         }          if (ModelState.IsValid)         {             try             {                 _context.Update(figurita);                 await _context.SaveChangesAsync();             }             catch (DbUpdateConcurrencyException)             {                 if (!FiguritaExists(figurita.Id))                 {                     return NotFound();                 }                 else                 {                     throw;                 }             }             return RedirectToAction(nameof(Index));         }         return View(figurita);     }      // GET: FIGURITAS/Delete/5     public async Task<IActionResult> Delete(int? id)     {         if (id == null)         {             return NotFound();         }          var figurita = await _context.Figuritas             .FirstOrDefaultAsync(m => m.Id == id);         if (figurita == null)         {             return NotFound();         }          return View(figurita);     }      // POST: FIGURITAS/Delete/5     [HttpPost, ActionName("Delete")]     [ValidateAntiForgeryToken]     public async Task<IActionResult> DeleteConfirmed(int? id)     {         var figurita = await _context.Figuritas.FindAsync(id);         if (figurita != null)         {             _context.Figuritas.Remove(figurita);         }          await _context.SaveChangesAsync();         return RedirectToAction(nameof(Index));     }      private bool FiguritaExists(int? id)     {         return _context.Figuritas.Any(e => e.Id == id);     } } 
