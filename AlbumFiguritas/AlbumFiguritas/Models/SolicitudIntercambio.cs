@@ -19,6 +19,9 @@
         // Fecha en la que se creó la solicitud
         public DateTime FechaCreacion { get; set; } = DateTime.Now;
 
+        // Fecha en la que se concretó el intercambio (si ocurrió)
+        public DateTime? FechaRealizacion { get; set; }
+
         // Navegación: usuario que creó la solicitud
         public Usuario Usuario { get; set; } = null!;
 

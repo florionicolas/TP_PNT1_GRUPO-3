@@ -1,0 +1,73 @@
+﻿@model AlbumFiguritas.Models.ViewModels.IntercambioViewModel
+
+@{
+    ViewData["Title"] = "Editar solicitud";
+}
+
+<h2>Editar solicitud de intercambio</h2>
+
+<form asp-action="GuardarEdicion" method="post">
+
+    <!-- NUEVO: enviamos el Id de la solicitud -->
+    <input type="hidden" name="id" value="@Model.Solicitud!.Id" />
+
+    <!-- FIGURITA OFRECIDA -->
+    <div class="mb-3">
+        <label>Figurita que ofrezco</label>
+
+        <select name="figuritaOfrecidaId" class="form-select">
+
+            @foreach (var f in Model.Repetidas)
+            {
+                if (f.Id == Model.Solicitud.FiguritaOfrecidaId)
+                {
+                    <option value="@f.Id" selected>
+                        @f.Numero - @f.NombreJugador
+                    </option>
+                }
+                else
+                {
+                    <option value="@f.Id">
+                        @f.Numero - @f.NombreJugador
+                    </option>
+                }
+            }
+
+        </select>
+    </div>
+
+    <!-- FIGURITA SOLICITADA -->
+    <div class="mb-3">
+        <label>Figurita que quiero</label>
+
+        <select name="figuritaSolicitadaId" class="form-select">
+
+            @foreach (var f in Model.Faltantes)
+            {
+                if (f.Id == Model.Solicitud.FiguritaSolicitadaId)
+                {
+                    <option value="@f.Id" selected>
+                        @f.Numero - @f.NombreJugador
+                    </option>
+                }
+                else
+                {
+                    <option value="@f.Id">
+                        @f.Numero - @f.NombreJugador
+                    </option>
+                }
+            }
+
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Guardar cambios
+    </button>
+
+    <a asp-action="Solicitudes"
+       class="btn btn-secondary">
+        Cancelar
+    </a>
+
+</form>

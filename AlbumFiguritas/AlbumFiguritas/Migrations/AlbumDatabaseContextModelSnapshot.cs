@@ -384,6 +384,9 @@ namespace AlbumFiguritas.Migrations
                     b.Property<DateTime>("FechaCreacion")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("FechaRealizacion")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("FiguritaOfrecidaId")
                         .HasColumnType("int");
 

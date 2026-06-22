@@ -1,4 +1,4 @@
-﻿@model List<AlbumFiguritas.Models.SolicitudIntercambio>
+﻿@model AlbumFiguritas.Models.ViewModels.IntercambioViewModel
 
 @{
     ViewData["Title"] = "Solicitudes de intercambio";
@@ -6,31 +6,86 @@
 
 <h2>Solicitudes de intercambio</h2>
 
-@if (!Model.Any())
+@if (!Model.SolicitudesActivas.Any() && !Model.SolicitudesRealizadas.Any())
 {
     <p>No tenés solicitudes creadas.</p>
 }
 else
 {
+    <h3>Solicitudes activas</h3>
+
     <table class="table">
         <thead>
             <tr>
                 <th>Ofrezco</th>
                 <th>Quiero</th>
-                <th>Estado</th>
-                <th>Fecha</th>
-            </tr>
+                <th>Creada</th>
+                <th>Acciones</th>
+             </tr>
         </thead>
         <tbody>
-            @foreach (var solicitud in Model)
+            @foreach (var solicitud in Model.SolicitudesActivas)
             {
                 <tr>
-                    <td>@solicitud.FiguritaOfrecidaId</td>
-                    <td>@solicitud.FiguritaSolicitadaId</td>
-                    <td>@solicitud.Estado</td>
+                    <td>
+                        @solicitud.FiguritaOfrecida.Numero -
+                        @solicitud.FiguritaOfrecida.NombreJugador
+                    </td>
+                    <td>
+                        @solicitud.FiguritaSolicitada.Numero -
+                        @solicitud.FiguritaSolicitada.NombreJugador
+                    </td>
                     <td>@solicitud.FechaCreacion.ToString("dd/MM/yyyy HH:mm")</td>
+                    
+                    <td>
+                        <a asp-action="Editar"
+                           asp-route-id="@solicitud.Id"
+                           class="btn btn-warning btn-sm">
+                            Editar
+                        </a>
+                        <a asp-action="Eliminar"
+                           asp-route-id="@solicitud.Id"
+                           class="btn btn-danger btn-sm">
+                            Eliminar
+                        </a>
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
+
+    <h3 class="mt-5">Solicitudes realizadas</h3>
+
+    @if (!Model.SolicitudesRealizadas.Any())
+    {
+        <p>No hay solicitudes realizadas.</p>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Ofrezco</th>
+                    <th>Quiero</th>
+                    <th>Realizada</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var solicitud in Model.SolicitudesRealizadas)
+                {
+                    <tr>
+                        <td>
+                            @solicitud.FiguritaOfrecida.Numero -
+                            @solicitud.FiguritaOfrecida.NombreJugador
+                        </td>
+                        <td>
+                            @solicitud.FiguritaSolicitada.Numero -
+                            @solicitud.FiguritaSolicitada.NombreJugador
+                        </td>
+                        <td>@(solicitud.FechaRealizacion?.ToString("dd/MM/yyyy HH:mm") ?? "-")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 }
