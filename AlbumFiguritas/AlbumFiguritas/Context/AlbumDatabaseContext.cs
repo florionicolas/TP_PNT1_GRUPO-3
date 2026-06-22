@@ -61,7 +61,7 @@ namespace AlbumFiguritas.Context
                 new Figurita { Id = 23, Numero = 23, NombreJugador = "Desire Doue", Seleccion = Pais.Francia, UrlFotoJugador = "img/Desire Doue.png" },
                 new Figurita { Id = 24, Numero = 24, NombreJugador = "Eduardo Camavinga", Seleccion = Pais.Francia, UrlFotoJugador = "img/Eduardo Camavinga.png" },
                 new Figurita { Id = 25, Numero = 25, NombreJugador = "Ibrahima Konate", Seleccion = Pais.Francia, UrlFotoJugador = "img/Ibrahima Konate.png" },
-                new Figurita { Id = 26, Numero = 26, NombreJugador = "Kingsley Coman", Seleccion = Pais.Francia, UrlFotoJugador = "img/Kingsley Koman.png" },
+                new Figurita { Id = 26, Numero = 26, NombreJugador = "Kingsley Koman", Seleccion = Pais.Francia, UrlFotoJugador = "img/Kingsley Koman.png" },
                 new Figurita { Id = 27, Numero = 27, NombreJugador = "Kylian Mbappe", Seleccion = Pais.Francia, UrlFotoJugador = "img/Kylian Mbappe.png" },
                 new Figurita { Id = 28, Numero = 28, NombreJugador = "Mike Maignan", Seleccion = Pais.Francia, UrlFotoJugador = "img/Mike Maignan.png" },
                 new Figurita { Id = 29, Numero = 29, NombreJugador = "Ousmane Dembele", Seleccion = Pais.Francia, UrlFotoJugador = "img/Ousmane Dembele.png" },
