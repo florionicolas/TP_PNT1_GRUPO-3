@@ -1,6 +1,42 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Politica de privacidad";
 }
-<h1>@ViewData["Title"]</h1>
+<div class="mt-5 mb-5">
+    <h1 class="mb-4 text-white">@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+    <div class="card bg-dark text-light border-secondary">
+        <div class="card-body p-4">
+
+            <h4 class="text-primary mb-3">1. Naturaleza del Proyecto</h4>
+            <p>
+                Esta aplicación web es un desarrollo con fines netamente académicos y demostrativos.
+                No tiene fines de lucro ni vínculos comerciales con entidades oficiales relacionadas a la Copa del Mundo o sus organizadores.
+            </p>
+
+            <h4 class="text-primary mt-4 mb-3">2. Recopilación de Datos</h4>
+            <p>Para el correcto funcionamiento del sistema de "Mi Álbum", almacenamos la siguiente información estrictamente necesaria:</p>
+            <ul>
+                <li><strong>Credenciales de acceso:</strong> Nombre de usuario y contraseña (almacenada de forma segura) para proteger tu cuenta.</li>
+                <li><strong>Datos de la colección:</strong> El estado de tus figuritas (obtenidas, faltantes y repetidas) para generar las estadísticas de tu panel de gestión.</li>
+            </ul>
+
+            <h4 class="text-primary mt-4 mb-3">3. Uso de Cookies y Sesiones</h4>
+            <p>
+                Este sitio web <strong>no utiliza cookies de seguimiento (tracking) ni con fines publicitarios</strong>.
+                Únicamente empleamos cookies técnicas y variables de sesión (Session) obligatorias en ASP.NET Core para mantener tu usuario logueado mientras navegás entre las distintas pantallas (como el Dashboard o la sección de Intercambios).
+            </p>
+
+            <h4 class="text-primary mt-4 mb-3">4. Privacidad y Terceros</h4>
+            <p>
+                Tus datos son privados y se encuentran aislados en nuestra base de datos. No compartimos, vendemos, ni cedemos información de los usuarios a ningún servicio de terceros.
+            </p>
+
+            <hr class="border-secondary mt-4 mb-4" />
+
+            <p class="text-muted text-center mb-0">
+                <small>Última actualización: @DateTime.Now.ToString("dd/MM/yyyy")</small>
+            </p>
+
+        </div>
+    </div>
+</div>
