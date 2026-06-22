@@ -35,7 +35,7 @@ namespace AlbumFiguritas.Controllers
                 if (usuarioEncontrado.Permiso.ToString() == "ADMINISTRADOR")
                 { return RedirectToAction("Index", "Home");} 
                 else
-                { return RedirectToAction("MiAlbum", "Album");
+                { return RedirectToAction("Index", "Home");
                 }
 
 

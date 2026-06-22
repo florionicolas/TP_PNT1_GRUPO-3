@@ -15,9 +15,11 @@
     @if (Context.Session.GetString("UsuarioId") != null)
         {
             <header>
-                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom border-light-subtle box-shadow mb-3">
                     <div class="container-fluid">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AlbumFiguritas</a>
+                       <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                        <img class="logoImagen" src="~/img/FIFA-2026-World-Cup-White2-Logo.png" alt="LogoMundial2026" />
+                       </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                                 aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -28,19 +30,16 @@
                                 @if (Context.Session.GetString("RolUsuario") == "ADMINISTRADOR")
                                 {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Figurita" asp-action="Index">Listado Figuritas</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Figurita" asp-action="Index">Listado Figuritas</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Index">Listado Usuarios</a>
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Usuario" asp-action="Index">Listado Usuarios</a>
                                 </li>
                                 }
                                 else
                                 {
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Album
                                     </a>
                                     <ul class="dropdown-menu">
@@ -75,13 +74,13 @@
             </header>
             }
         
-    <div class="container">
+    <div class="@(ViewBag.UseFluidContainer == true ? "container-fluid" : "container")">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer">
         <div class="container">
             &copy; 2026 - AlbumFiguritas - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

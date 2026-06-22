@@ -1,8 +1,23 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Inicio";
+    ViewBag.UseFluidContainer = true;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="hero-section mt-4 shadow-lg">
+
+    <video autoplay loop muted playsinline class="hero-video">
+        <source src="~/videos/Mundial2026.mp4" type="video/mp4">
+    </video>
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+        <h1 class="display-3 fw-bold" style="text-shadow: 2px 2px 5px rgba(0,0,0,0.8);">
+            Bienvenido al álbum online ORT
+        </h1>
+        <p class="lead mt-3 fs-4">
+            Comenzá a gestionar tus figuritas.
+        </p>
+    </div>
+
 </div>

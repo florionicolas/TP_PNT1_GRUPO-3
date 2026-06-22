@@ -4,7 +4,7 @@
     {
         // Temporalmente se utilizan tipos anulables (?) para evitar warnings durante el modelado inicial.
         // Más adelante se evaluará qué campos deben ser obligatorios e inicializados.
-        
+
         // DIFERENCIA:
         // Usar "?" cuando el atributo pueda no tener valor (null) 
         // Inicializar cuando el atributo deba existir obligatoriamente en el sistema y no debería ser null.
