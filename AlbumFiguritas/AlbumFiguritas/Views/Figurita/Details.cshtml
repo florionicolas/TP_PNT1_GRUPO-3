@@ -7,45 +7,67 @@
 <h1>Detalles</h1>
 
 <div>
+    <h4>Figurita</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Numero)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Numero)
-        </dd>
-    </dl>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NombreJugador)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NombreJugador)
-        </dd>
-    </dl>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Seleccion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Seleccion)
-        </dd>
-    </dl>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UrlFotoJugador)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UrlFotoJugador)
-        </dd>
-    </dl>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsuariosPoseen)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UsuariosPoseen)
-        </dd>
-    </dl>
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Numero)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Numero)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.NombreJugador)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.NombreJugador)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Seleccion)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Seleccion)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.UrlFotoJugador)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.UrlFotoJugador)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.UsuariosPoseen)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.UsuariosPoseen)
+                </dd>
+            </dl>
+        </div>
+
+        <div class="col-md-6 d-flex justify-content-center align-items-start">
+            @if (!string.IsNullOrEmpty(Model.UrlFotoJugador))
+            {
+                <img src="~/@Model.UrlFotoJugador" alt="Foto de @Model.NombreJugador" class="img-fluid rounded shadow-lg" style="max-height: 400px; object-fit: contain; border: 2px solid #343a40;" />
+            }
+            else
+            {
+                <div class="alert alert-secondary text-center w-100" role="alert">
+                    Sin imagen disponible
+                </div>
+            }
+        </div>
+
+    </div>
 </div>
-<div>
-    <a class="btn btn-outline-primary text-white" asp-action="Edit" asp-route-id="@Model?.Id">Editar</a>
+
+<div class="mt-4">
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-outline-primary">Editar</a>
+    <a asp-action="Index" class="btn btn-outline-warning">Volver</a>
 </div>
-<a class="btn btn-outline-warning mt-3" asp-action="Index">Volver</a>
