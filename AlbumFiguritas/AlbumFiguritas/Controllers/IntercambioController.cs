@@ -59,6 +59,7 @@ namespace AlbumFiguritas.Controllers
             // VALIDACIÓN 1: no puede ser la misma figurita
             if (figuritaOfrecidaId == figuritaSolicitadaId)
             {
+                TempData["Error"] = "No podés intercambiar la misma figurita.";
                 return RedirectToAction("Gestion");
             }
 
@@ -71,6 +72,22 @@ namespace AlbumFiguritas.Controllers
 
             if (!tieneFigurita)
             {
+                TempData["Error"] = "No tenés esa figurita repetida.";
+                return RedirectToAction("Gestion");
+            }
+
+            // EVITAR SOLICITUDES DUPLICADAS
+            var existeSolicitudDuplicada = _context.SolicitudesIntercambio
+                .Any(s =>
+                    s.UsuarioId == usuarioId.Value &&
+                    s.FiguritaOfrecidaId == figuritaOfrecidaId &&
+                    s.FiguritaSolicitadaId == figuritaSolicitadaId &&
+                    s.Estado == EstadoSolicitud.ACTIVA
+                );
+
+            if (existeSolicitudDuplicada)
+            {
+                TempData["Error"] = "Ya tenés una solicitud activa con estas figuritas.";
                 return RedirectToAction("Gestion");
             }
 
@@ -87,6 +104,8 @@ namespace AlbumFiguritas.Controllers
             _context.SolicitudesIntercambio.Add(solicitud);
             IntentarMatch(solicitud);
             _context.SaveChanges();
+
+            TempData["Ok"] = "Solicitud creada correctamente.";
 
             return RedirectToAction("Gestion");
         }
