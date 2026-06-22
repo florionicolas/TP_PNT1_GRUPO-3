@@ -14,45 +14,56 @@ else
 {
     <h3>Solicitudes activas</h3>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Ofrezco</th>
-                <th>Quiero</th>
-                <th>Creada</th>
-                <th>Acciones</th>
-             </tr>
-        </thead>
-        <tbody>
-            @foreach (var solicitud in Model.SolicitudesActivas)
-            {
+    @if (!Model.SolicitudesActivas.Any())
+    {
+        <p>No tenés solicitudes activas en este momento.</p>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>
-                        @solicitud.FiguritaOfrecida.Numero -
-                        @solicitud.FiguritaOfrecida.NombreJugador
-                    </td>
-                    <td>
-                        @solicitud.FiguritaSolicitada.Numero -
-                        @solicitud.FiguritaSolicitada.NombreJugador
-                    </td>
-                    <td>@solicitud.FechaCreacion.ToString("dd/MM/yyyy HH:mm")</td>
-                    
-                    <td>
-                        <a asp-action="Editar"
-                           asp-route-id="@solicitud.Id"
-                           class="btn btn-warning btn-sm">
-                            Editar
-                        </a>
-                        <a asp-action="Eliminar"
-                           asp-route-id="@solicitud.Id"
-                           class="btn btn-danger btn-sm">
-                            Eliminar
-                        </a>
-                    </td>
+                    <th>Ofrezco</th>
+                    <th>Quiero</th>
+                    <th>Creada</th>
+                    <th>Acciones</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+
+            <tbody>
+                @foreach (var solicitud in Model.SolicitudesActivas)
+                {
+                    <tr>
+                        <td>
+                            @solicitud.FiguritaOfrecida.Numero -
+                            @solicitud.FiguritaOfrecida.NombreJugador
+                        </td>
+                        <td>
+                            @solicitud.FiguritaSolicitada.Numero -
+                            @solicitud.FiguritaSolicitada.NombreJugador
+                        </td>
+                        <td>
+                            @solicitud.FechaCreacion.ToString("dd/MM/yyyy HH:mm")
+                        </td>
+
+                        <td>
+                            <a asp-action="Editar"
+                               asp-route-id="@solicitud.Id"
+                               class="btn btn-warning btn-sm">
+                                Editar
+                            </a>
+
+                            <a asp-action="Eliminar"
+                               asp-route-id="@solicitud.Id"
+                               class="btn btn-danger btn-sm">
+                                Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 
     <h3 class="mt-5">Solicitudes realizadas</h3>
 
@@ -70,6 +81,7 @@ else
                     <th>Realizada</th>
                 </tr>
             </thead>
+
             <tbody>
                 @foreach (var solicitud in Model.SolicitudesRealizadas)
                 {
@@ -78,11 +90,15 @@ else
                             @solicitud.FiguritaOfrecida.Numero -
                             @solicitud.FiguritaOfrecida.NombreJugador
                         </td>
+
                         <td>
                             @solicitud.FiguritaSolicitada.Numero -
                             @solicitud.FiguritaSolicitada.NombreJugador
                         </td>
-                        <td>@(solicitud.FechaRealizacion?.ToString("dd/MM/yyyy HH:mm") ?? "-")</td>
+
+                        <td>
+                            @(solicitud.FechaRealizacion?.ToString("dd/MM/yyyy HH:mm") ?? "-")
+                        </td>
                     </tr>
                 }
             </tbody>

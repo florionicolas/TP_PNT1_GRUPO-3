@@ -26,14 +26,14 @@ namespace AlbumFiguritas.Controllers
             // REPETIDAS (cantidad > 1)
             var repetidas = _context.UsuarioFiguritas
                 .Where(uf => uf.UsuarioId == usuarioId.Value && uf.Cantidad > 1)
-                .Select(uf => uf.Figurita)
+                .Select(uf => uf.Figurita!)
                 .ToList();
 
             // FALTANTES (no posee la figurita)
             var idsUsuario = _context.UsuarioFiguritas
                 .Where(uf => uf.UsuarioId == usuarioId.Value)
                 .Select(uf => uf.FiguritaId)
-                .ToList();
+                .ToList()!;
 
             var faltantes = _context.Figuritas
                 .Where(f => !idsUsuario.Contains(f.Id))
@@ -85,10 +85,12 @@ namespace AlbumFiguritas.Controllers
             };
 
             _context.SolicitudesIntercambio.Add(solicitud);
+            IntentarMatch(solicitud);
             _context.SaveChanges();
 
             return RedirectToAction("Gestion");
         }
+
         [HttpGet]
         public IActionResult Solicitudes()
         {
@@ -127,6 +129,79 @@ namespace AlbumFiguritas.Controllers
             return View(model);
         }
 
+        private void IntentarMatch(SolicitudIntercambio nuevaSolicitud)
+        {
+            var match = _context.SolicitudesIntercambio
+                .FirstOrDefault(s =>
+                    s.Estado == EstadoSolicitud.ACTIVA &&
+                    s.UsuarioId != nuevaSolicitud.UsuarioId &&
+                    s.FiguritaOfrecidaId == nuevaSolicitud.FiguritaSolicitadaId &&
+                    s.FiguritaSolicitadaId == nuevaSolicitud.FiguritaOfrecidaId);
+
+            if (match == null)
+                return;
+
+            var fecha = DateTime.Now;
+
+            // Cambiar estado
+            nuevaSolicitud.Estado = EstadoSolicitud.REALIZADA;
+            match.Estado = EstadoSolicitud.REALIZADA;
+
+            nuevaSolicitud.FechaRealizacion = fecha;
+            match.FechaRealizacion = fecha;
+
+            // Intercambio real de figuritas
+
+            // Usuario A (nuevaSolicitud.UsuarioId)
+            IntercambiarFiguritas(
+                nuevaSolicitud.UsuarioId,
+                nuevaSolicitud.FiguritaOfrecidaId,
+                nuevaSolicitud.FiguritaSolicitadaId);
+
+            // Usuario B (match.UsuarioId)
+            IntercambiarFiguritas(
+                match.UsuarioId,
+                match.FiguritaOfrecidaId,
+                match.FiguritaSolicitadaId);
+        }
+
+        private void IntercambiarFiguritas(int usuarioId, int figuritaSale, int figuritaEntra)
+        {
+            // QUITAR figurita que entrega
+            var itemSale = _context.UsuarioFiguritas
+                .FirstOrDefault(u =>
+                    u.UsuarioId == usuarioId &&
+                    u.FiguritaId == figuritaSale);
+
+            if (itemSale != null)
+            {
+                itemSale.Cantidad--;
+
+                if (itemSale.Cantidad <= 0)
+                    _context.UsuarioFiguritas.Remove(itemSale);
+            }
+
+            // AGREGAR figurita que recibe
+            var itemEntra = _context.UsuarioFiguritas
+                .FirstOrDefault(u =>
+                    u.UsuarioId == usuarioId &&
+                    u.FiguritaId == figuritaEntra);
+
+            if (itemEntra != null)
+            {
+                itemEntra.Cantidad++;
+            }
+            else
+            {
+                _context.UsuarioFiguritas.Add(new UsuarioFigurita
+                {
+                    UsuarioId = usuarioId,
+                    FiguritaId = figuritaEntra,
+                    Cantidad = 1
+                });
+            }
+        }
+
         [HttpGet]
         public IActionResult Editar(int id)
         {
@@ -147,7 +222,7 @@ namespace AlbumFiguritas.Controllers
             // Obtener las figuritas repetidas del usuario
             var repetidas = _context.UsuarioFiguritas
                 .Where(uf => uf.UsuarioId == usuarioId.Value && uf.Cantidad > 1)
-                .Select(uf => uf.Figurita)
+                .Select(uf => uf.Figurita!)
                 .ToList();
 
             // Obtener las figuritas faltantes del usuario
@@ -250,6 +325,8 @@ namespace AlbumFiguritas.Controllers
 
             return RedirectToAction("Solicitudes");
         }
+
+
 
     }
 }
