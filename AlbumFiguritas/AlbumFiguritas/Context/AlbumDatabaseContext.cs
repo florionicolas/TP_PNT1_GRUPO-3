@@ -12,6 +12,7 @@ namespace AlbumFiguritas.Context
         public DbSet<Figurita> Figuritas { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<UsuarioFigurita> UsuarioFiguritas { get; set; }
+        public DbSet<SolicitudIntercambio> SolicitudesIntercambio { get; set; }
 
         //Esto crea un seed de datos para que la base de datos tenga información inicial. En este caso, se crean 6 usuarios (3 administradores y 3 usuarios por defecto) y 40 figuritas correspondientes a las selecciones de Argentina, Brasil, Francia e Inglaterra.
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -80,6 +81,19 @@ namespace AlbumFiguritas.Context
             };
 
             modelBuilder.Entity<Figurita>().HasData(listaFiguritas);
+
+            // Configuración de relaciones para evitar múltiples Cascade Delete
+            modelBuilder.Entity<SolicitudIntercambio>()
+                .HasOne(s => s.FiguritaOfrecida)
+                .WithMany()
+                .HasForeignKey(s => s.FiguritaOfrecidaId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<SolicitudIntercambio>()
+                .HasOne(s => s.FiguritaSolicitada)
+                .WithMany()
+                .HasForeignKey(s => s.FiguritaSolicitadaId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
     }

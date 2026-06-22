@@ -1,0 +1,41 @@
+﻿@model AlbumFiguritas.Models.ViewModels.IntercambioViewModel
+
+@{
+    ViewData["Title"] = "Intercambios";
+}
+
+<h2>Crear solicitud de intercambio</h2>
+
+<form asp-action="Crear" method="post">
+
+    <!-- OFREZCO -->
+    <div class="mb-3">
+        <label>Figurita que ofrezco (repetida)</label>
+        <select name="figuritaOfrecidaId" class="form-select">
+            @foreach (var f in Model.Repetidas)
+            {
+                <option value="@f.Id">
+                    @f.Numero - @f.NombreJugador
+                </option>
+            }
+        </select>
+    </div>
+
+    <!-- QUIERO -->
+    <div class="mb-3">
+        <label>Figurita que quiero (faltante)</label>
+        <select name="figuritaSolicitadaId" class="form-select">
+            @foreach (var f in Model.Faltantes)
+            {
+                <option value="@f.Id">
+                    @f.Numero - @f.NombreJugador
+                </option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Crear solicitud
+    </button>
+
+</form>

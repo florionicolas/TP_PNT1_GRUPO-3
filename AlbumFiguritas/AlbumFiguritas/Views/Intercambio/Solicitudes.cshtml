@@ -1,0 +1,36 @@
+﻿@model List<AlbumFiguritas.Models.SolicitudIntercambio>
+
+@{
+    ViewData["Title"] = "Solicitudes de intercambio";
+}
+
+<h2>Solicitudes de intercambio</h2>
+
+@if (!Model.Any())
+{
+    <p>No tenés solicitudes creadas.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Ofrezco</th>
+                <th>Quiero</th>
+                <th>Estado</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var solicitud in Model)
+            {
+                <tr>
+                    <td>@solicitud.FiguritaOfrecidaId</td>
+                    <td>@solicitud.FiguritaSolicitadaId</td>
+                    <td>@solicitud.Estado</td>
+                    <td>@solicitud.FechaCreacion.ToString("dd/MM/yyyy HH:mm")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
