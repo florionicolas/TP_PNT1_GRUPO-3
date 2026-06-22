@@ -4,6 +4,7 @@ using AlbumFiguritas.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AlbumFiguritas.Migrations
 {
     [DbContext(typeof(AlbumDatabaseContext))]
-    partial class AlbumDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20260622050206_CambioUrlFotoJugador")]
+    partial class CambioUrlFotoJugador
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -251,7 +254,7 @@ namespace AlbumFiguritas.Migrations
                         new
                         {
                             Id = 26,
-                            NombreJugador = "Kingsley Coman",
+                            NombreJugador = "Kingsley Koman",
                             Numero = 26,
                             Seleccion = 22,
                             UrlFotoJugador = "img/Kingsley Koman.png"

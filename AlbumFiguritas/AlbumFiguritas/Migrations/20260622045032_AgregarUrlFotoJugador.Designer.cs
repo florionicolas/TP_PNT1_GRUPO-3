@@ -4,6 +4,7 @@ using AlbumFiguritas.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AlbumFiguritas.Migrations
 {
     [DbContext(typeof(AlbumDatabaseContext))]
-    partial class AlbumDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20260622045032_AgregarUrlFotoJugador")]
+    partial class AgregarUrlFotoJugador
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,7 +57,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Emiliano Martinez",
                             Numero = 1,
                             Seleccion = 3,
-                            UrlFotoJugador = "img/Emiliano Martinez.png"
+                            UrlFotoJugador = "img/Emiliano Martinez.jpg"
                         },
                         new
                         {
@@ -62,7 +65,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Nahuel Molina",
                             Numero = 2,
                             Seleccion = 3,
-                            UrlFotoJugador = "img/Nahuel Molina.png"
+                            UrlFotoJugador = "img/Nahuel Molina.jpg"
                         },
                         new
                         {
@@ -70,7 +73,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Cristian Romero",
                             Numero = 3,
                             Seleccion = 3,
-                            UrlFotoJugador = "img/Cristian Romero.png"
+                            UrlFotoJugador = "img/Cristian Romero.jpg"
                         },
                         new
                         {
@@ -78,7 +81,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Nicolas Otamendi",
                             Numero = 4,
                             Seleccion = 3,
-                            UrlFotoJugador = "img/Nicolas Otamendi.png"
+                            UrlFotoJugador = "img/Nicolas Otamendi.jpg"
                         },
                         new
                         {
@@ -86,7 +89,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Nicolas Tagliafico",
                             Numero = 5,
                             Seleccion = 3,
-                            UrlFotoJugador = "img/Nicolas Tagliafico.png"
+                            UrlFotoJugador = "img/Nicolas Tagliafico.jpg"
                         },
                         new
                         {
@@ -94,7 +97,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Rodrigo De Paul",
                             Numero = 6,
                             Seleccion = 3,
-                            UrlFotoJugador = "img/Rodrigo De Paul.png"
+                            UrlFotoJugador = "img/Rodrigo De Paul.jpg"
                         },
                         new
                         {
@@ -102,7 +105,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Enzo Fernandez",
                             Numero = 7,
                             Seleccion = 3,
-                            UrlFotoJugador = "img/Enzo Fernandez.png"
+                            UrlFotoJugador = "img/Enzo Fernandez.jpg"
                         },
                         new
                         {
@@ -110,7 +113,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Alexis Mac Allister",
                             Numero = 8,
                             Seleccion = 3,
-                            UrlFotoJugador = "img/Alexis Mac Allister.png"
+                            UrlFotoJugador = "img/Alexis Mac Allister.jpg"
                         },
                         new
                         {
@@ -118,7 +121,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Julian Alvarez",
                             Numero = 9,
                             Seleccion = 3,
-                            UrlFotoJugador = "img/Julian Alvarez.png"
+                            UrlFotoJugador = "img/Julian Alvarez.jpg"
                         },
                         new
                         {
@@ -126,7 +129,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Lionel Messi",
                             Numero = 10,
                             Seleccion = 3,
-                            UrlFotoJugador = "img/Lionel Messi.png"
+                            UrlFotoJugador = "img/Lionel Messi.jpg"
                         },
                         new
                         {
@@ -134,7 +137,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Alisson Becker",
                             Numero = 11,
                             Seleccion = 8,
-                            UrlFotoJugador = "img/Alisson Becker.png"
+                            UrlFotoJugador = "img/Alisson Becker.jpg"
                         },
                         new
                         {
@@ -142,7 +145,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Bruno Guimaraes",
                             Numero = 12,
                             Seleccion = 8,
-                            UrlFotoJugador = "img/Bruno Guimaraes.png"
+                            UrlFotoJugador = "img/Bruno Guimaraes.jpg"
                         },
                         new
                         {
@@ -150,7 +153,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Casemiro",
                             Numero = 13,
                             Seleccion = 8,
-                            UrlFotoJugador = "img/Casemiro.png"
+                            UrlFotoJugador = "img/Casemiro.jpg"
                         },
                         new
                         {
@@ -158,7 +161,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Danilo",
                             Numero = 14,
                             Seleccion = 8,
-                            UrlFotoJugador = "img/Danilo.png"
+                            UrlFotoJugador = "img/Danilo.jpg"
                         },
                         new
                         {
@@ -166,7 +169,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Lucas Paqueta",
                             Numero = 15,
                             Seleccion = 8,
-                            UrlFotoJugador = "img/Lucas Paqueta.png"
+                            UrlFotoJugador = "img/Lucas Paqueta.jpg"
                         },
                         new
                         {
@@ -174,7 +177,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Marquinhos",
                             Numero = 16,
                             Seleccion = 8,
-                            UrlFotoJugador = "img/Marquinhos.png"
+                            UrlFotoJugador = "img/Marquinhos.jpg"
                         },
                         new
                         {
@@ -182,7 +185,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Mateus Cunha",
                             Numero = 17,
                             Seleccion = 8,
-                            UrlFotoJugador = "img/Mateus Cunha.png"
+                            UrlFotoJugador = "img/Mateus Cunha.jpg"
                         },
                         new
                         {
@@ -190,7 +193,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Raphinha",
                             Numero = 18,
                             Seleccion = 8,
-                            UrlFotoJugador = "img/Raphinha.png"
+                            UrlFotoJugador = "img/Raphinha.jpg"
                         },
                         new
                         {
@@ -198,7 +201,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Vinicius Junior",
                             Numero = 19,
                             Seleccion = 8,
-                            UrlFotoJugador = "img/Vinicius Junior.png"
+                            UrlFotoJugador = "img/Vinicius Junior.jpg"
                         },
                         new
                         {
@@ -206,7 +209,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Wesley",
                             Numero = 20,
                             Seleccion = 8,
-                            UrlFotoJugador = "img/Wesley.png"
+                            UrlFotoJugador = "img/Wesley.jpg"
                         },
                         new
                         {
@@ -214,7 +217,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Aurelien Tchouameni",
                             Numero = 21,
                             Seleccion = 22,
-                            UrlFotoJugador = "img/Aurelien Tchouameni.png"
+                            UrlFotoJugador = "img/Aurelien Tchouameni.jpg"
                         },
                         new
                         {
@@ -222,7 +225,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Dayot Upamecano",
                             Numero = 22,
                             Seleccion = 22,
-                            UrlFotoJugador = "img/Dayot Upamecano.png"
+                            UrlFotoJugador = "img/Dayot Upamecano.jpg"
                         },
                         new
                         {
@@ -230,7 +233,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Desire Doue",
                             Numero = 23,
                             Seleccion = 22,
-                            UrlFotoJugador = "img/Desire Doue.png"
+                            UrlFotoJugador = "img/Desire Doue.jpg"
                         },
                         new
                         {
@@ -238,7 +241,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Eduardo Camavinga",
                             Numero = 24,
                             Seleccion = 22,
-                            UrlFotoJugador = "img/Eduardo Camavinga.png"
+                            UrlFotoJugador = "img/Eduardo Camavinga.jpg"
                         },
                         new
                         {
@@ -246,15 +249,15 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Ibrahima Konate",
                             Numero = 25,
                             Seleccion = 22,
-                            UrlFotoJugador = "img/Ibrahima Konate.png"
+                            UrlFotoJugador = "img/Ibrahima Konate.jpg"
                         },
                         new
                         {
                             Id = 26,
-                            NombreJugador = "Kingsley Coman",
+                            NombreJugador = "Kingsley Koman",
                             Numero = 26,
                             Seleccion = 22,
-                            UrlFotoJugador = "img/Kingsley Koman.png"
+                            UrlFotoJugador = "img/Kingsley Koman.jpg"
                         },
                         new
                         {
@@ -262,7 +265,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Kylian Mbappe",
                             Numero = 27,
                             Seleccion = 22,
-                            UrlFotoJugador = "img/Kylian Mbappe.png"
+                            UrlFotoJugador = "img/Kylian Mbappe.jpg"
                         },
                         new
                         {
@@ -270,7 +273,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Mike Maignan",
                             Numero = 28,
                             Seleccion = 22,
-                            UrlFotoJugador = "img/Mike Maignan.png"
+                            UrlFotoJugador = "img/Mike Maignan.jpg"
                         },
                         new
                         {
@@ -278,7 +281,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Ousmane Dembele",
                             Numero = 29,
                             Seleccion = 22,
-                            UrlFotoJugador = "img/Ousmane Dembele.png"
+                            UrlFotoJugador = "img/Ousmane Dembele.jpg"
                         },
                         new
                         {
@@ -286,7 +289,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Theo Hernandez",
                             Numero = 30,
                             Seleccion = 22,
-                            UrlFotoJugador = "img/Theo Hernandez.png"
+                            UrlFotoJugador = "img/Theo Hernandez.jpg"
                         },
                         new
                         {
@@ -294,7 +297,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Alexander Arnold",
                             Numero = 31,
                             Seleccion = 25,
-                            UrlFotoJugador = "img/Alexander Arnold.png"
+                            UrlFotoJugador = "img/Alexander Arnold.jpg"
                         },
                         new
                         {
@@ -302,7 +305,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Declan Rice",
                             Numero = 32,
                             Seleccion = 25,
-                            UrlFotoJugador = "img/Declan Rice.png"
+                            UrlFotoJugador = "img/Declan Rice.jpg"
                         },
                         new
                         {
@@ -310,7 +313,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Ezri Konsa",
                             Numero = 33,
                             Seleccion = 25,
-                            UrlFotoJugador = "img/Ezri Konsa.png"
+                            UrlFotoJugador = "img/Ezri Konsa.jpg"
                         },
                         new
                         {
@@ -318,7 +321,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Harry Kane",
                             Numero = 34,
                             Seleccion = 25,
-                            UrlFotoJugador = "img/Harry Kane.png"
+                            UrlFotoJugador = "img/Harry Kane.jpg"
                         },
                         new
                         {
@@ -326,7 +329,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "John Stones",
                             Numero = 35,
                             Seleccion = 25,
-                            UrlFotoJugador = "img/John Stones.png"
+                            UrlFotoJugador = "img/John Stones.jpg"
                         },
                         new
                         {
@@ -334,7 +337,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Jordan Henderson",
                             Numero = 36,
                             Seleccion = 25,
-                            UrlFotoJugador = "img/Jordan Henderson.png"
+                            UrlFotoJugador = "img/Jordan Henderson.jpg"
                         },
                         new
                         {
@@ -342,7 +345,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Jordan Pickford",
                             Numero = 37,
                             Seleccion = 25,
-                            UrlFotoJugador = "img/Jordan Pickford.png"
+                            UrlFotoJugador = "img/Jordan Pickford.jpg"
                         },
                         new
                         {
@@ -350,7 +353,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Jude Bellingham",
                             Numero = 38,
                             Seleccion = 25,
-                            UrlFotoJugador = "img/Jude Bellingham.png"
+                            UrlFotoJugador = "img/Jude Bellingham.jpg"
                         },
                         new
                         {
@@ -358,7 +361,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Phil Foden",
                             Numero = 39,
                             Seleccion = 25,
-                            UrlFotoJugador = "img/Phil Foden.png"
+                            UrlFotoJugador = "img/Phil Foden.jpg"
                         },
                         new
                         {
@@ -366,7 +369,7 @@ namespace AlbumFiguritas.Migrations
                             NombreJugador = "Reece James",
                             Numero = 40,
                             Seleccion = 25,
-                            UrlFotoJugador = "img/Reece James.png"
+                            UrlFotoJugador = "img/Reece James.jpg"
                         });
                 });
 

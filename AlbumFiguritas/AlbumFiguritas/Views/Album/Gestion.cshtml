@@ -86,61 +86,82 @@
 
     </form>
 
-    <!-- Resultados -->
-    <table class="table table-striped tabla-figuritas table-dark table-hover">
-        <thead>
-            <tr>
-                <th>Número</th>
-                <th>Jugador</th>
-                <th>Selección</th>
-                <th>Cantidad</th>
-                <th>Acción</th>
-            </tr>
-        </thead>
-
-        <tbody>
+    @if (!Model.Any())
+    {
+        <div class="alert alert-warning text-center shadow-sm" role="alert">
+            No se encontraron figuritas que coincidan con la búsqueda.
+        </div>
+    }
+    else
+    {
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4 text-center mt-2">
             @foreach (var figurita in Model)
             {
-                // Usamos el diccionario pasado desde el controlador para obtener la cantidad real de cada figurita. Si no se encuentra, asumimos que es 0.
                 var diccionario = ViewBag.Cantidades as Dictionary<int, int>;
-
                 int cantidadReal = 0;
                 if (diccionario != null && diccionario.ContainsKey(figurita.Id))
                 {
                     cantidadReal = diccionario[figurita.Id];
                 }
 
-                <tr>
-                    <td class="align-middle">@figurita.Numero</td>
-                    <td class="align-middle">@figurita.NombreJugador</td>
-                    <td class="align-middle">@figurita.Seleccion</td>
-                    <td class="align-middle">@cantidadReal</td>
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-secondary bg-dark text-white">
 
-                    <td class="align-middle">
-                        <div class="d-inline-flex gap-1">
-                            <form asp-action="ActualizarCantidad" method="post">
-                                <input type="hidden" name="figuritaId" value="@figurita.Id" />
-                                <input type="hidden" name="cambio" value="1" />
-                                <input type="hidden" name="busqueda" value="@ViewBag.Busqueda" />
-                                <input type="hidden" name="seleccion" value="@ViewBag.Seleccion" />
-                                <input type="hidden" name="estado" value="@ViewBag.Estado" />
-                                <button type="submit" class="btn btn-sm btn-success px-3">+</button>
-                            </form>
-
-                            <form asp-action="ActualizarCantidad" method="post">
-                                <input type="hidden" name="figuritaId" value="@figurita.Id" />
-                                <input type="hidden" name="cambio" value="-1" />
-                                <input type="hidden" name="busqueda" value="@ViewBag.Busqueda" />
-                                <input type="hidden" name="seleccion" value="@ViewBag.Seleccion" />
-                                <input type="hidden" name="estado" value="@ViewBag.Estado" />
-                                <button type="submit" class="btn btn-sm btn-danger px-3" @(cantidadReal <= 0 ? "disabled" : "")>-</button>
-                            </form>
+                        <div class="p-2 bg-secondary rounded-top">
+                            @if (!string.IsNullOrEmpty(figurita.UrlFotoJugador))
+                            {
+                                <img src="~/img/@(figurita.NombreJugador).png"
+                                     alt="Foto de @figurita.NombreJugador"
+                                     class="card-img-top img-fluid rounded shadow-sm"
+                                     style="width: 150px; height: 210px; object-fit: cover;"
+                                     onerror="this.onerror=null;this.src='/img/default.png';" />
+                            }
+                            else
+                            {
+                                <img src="/img/default.png" class="card-img-top img-fluid rounded" style="height: 180px; object-fit: cover;" />
+                            }
                         </div>
-                    </td>
-                </tr>
+
+                        <div class="card-body d-flex flex-column justify-content-between p-3">
+
+                            <div>
+                                <span class="badge bg-light text-dark mb-1">#@figurita.Numero</span>
+                                <h6 class="card-title font-weight-bold text-truncate m-0" title="@figurita.NombreJugador">
+                                    @figurita.NombreJugador
+                                </h6>
+                                <p class="card-text text-muted small mt-1 mb-2">@figurita.Seleccion</p>
+
+                                <div class="badge @(cantidadReal > 0 ? "bg-info text-dark" : "bg-danger text-white") mb-3 fs-6 w-100 py-2 shadow-sm">
+                                    Cantidad: @cantidadReal
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between gap-2 mt-auto">
+
+                                <form asp-action="ActualizarCantidad" method="post" class="w-50 m-0">
+                                    <input type="hidden" name="figuritaId" value="@figurita.Id" />
+                                    <input type="hidden" name="cambio" value="-1" />
+                                    <input type="hidden" name="busqueda" value="@ViewBag.Busqueda" />
+                                    <input type="hidden" name="seleccion" value="@ViewBag.Seleccion" />
+                                    <input type="hidden" name="estado" value="@ViewBag.Estado" />
+                                    <button type="submit" class="btn btn-sm btn-danger w-100 fw-bold fs-5" @(cantidadReal <= 0 ? "disabled" : "")>-</button>
+                                </form>
+
+                                <form asp-action="ActualizarCantidad" method="post" class="w-50 m-0">
+                                    <input type="hidden" name="figuritaId" value="@figurita.Id" />
+                                    <input type="hidden" name="cambio" value="1" />
+                                    <input type="hidden" name="busqueda" value="@ViewBag.Busqueda" />
+                                    <input type="hidden" name="seleccion" value="@ViewBag.Seleccion" />
+                                    <input type="hidden" name="estado" value="@ViewBag.Estado" />
+                                    <button type="submit" class="btn btn-sm btn-success w-100 fw-bold fs-5">+</button>
+                                </form>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             }
-        </tbody>
-
-    </table>
-
+        </div>
+    }
 </div>

@@ -14,7 +14,7 @@
 
         public Pais Seleccion {  get; set; }
 
-        public string? UrlFotoJugador { get; set; }
+        public string UrlFotoJugador { get; set; }
 
         public List<UsuarioFigurita> UsuariosPoseen { get; set; } = new List<UsuarioFigurita>();
 

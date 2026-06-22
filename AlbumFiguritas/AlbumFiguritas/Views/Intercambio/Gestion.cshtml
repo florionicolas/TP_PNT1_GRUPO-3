@@ -1,41 +1,106 @@
 ﻿@model AlbumFiguritas.Models.ViewModels.IntercambioViewModel
 
 @{
-    ViewData["Title"] = "Intercambios";
+    ViewData["Title"] = "Crear Intercambio";
 }
 
-<h2>Crear solicitud de intercambio</h2>
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Crear solicitud de intercambio</h2>
+    <hr class="mb-4" />
 
-<form asp-action="Crear" method="post">
+    <form asp-action="Crear" method="post">
 
-    <!-- OFREZCO -->
-    <div class="mb-3">
-        <label>Figurita que ofrezco (repetida)</label>
-        <select name="figuritaOfrecidaId" class="form-select">
-            @foreach (var f in Model.Repetidas)
-            {
-                <option value="@f.Id">
-                    @f.Numero - @f.NombreJugador
-                </option>
-            }
-        </select>
-    </div>
+        <div class="card mb-5 shadow-sm border-info bg-dark text-white">
+            <div class="card-header bg-info text-dark">
+                <h5 class="mb-0 fw-bold">1. Seleccioná la figurita que ofrecés (Tus Repetidas)</h5>
+            </div>
+            <div class="card-body" style="max-height: 500px; overflow-y: auto;">
 
-    <!-- QUIERO -->
-    <div class="mb-3">
-        <label>Figurita que quiero (faltante)</label>
-        <select name="figuritaSolicitadaId" class="form-select">
-            @foreach (var f in Model.Faltantes)
-            {
-                <option value="@f.Id">
-                    @f.Numero - @f.NombreJugador
-                </option>
-            }
-        </select>
-    </div>
+                @if (!Model.Repetidas.Any())
+                {
+                    <div class="alert alert-light text-center m-3">No tenés figuritas repetidas para ofrecer.</div>
+                }
+                else
+                {
+                    <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3 text-center p-2">
+                        @foreach (var f in Model.Repetidas)
+                        {
+                            <div class="col">
+                                <input type="radio" class="btn-check" name="figuritaOfrecidaId" id="ofrezco_@f.Id" value="@f.Id" required autocomplete="off">
 
-    <button type="submit" class="btn btn-primary">
-        Crear solicitud
-    </button>
+                                <label class="btn btn-outline-info w-100 h-100 p-0 text-start border-2 shadow-sm d-flex flex-column" for="ofrezco_@f.Id">
+                                    <div class="bg-light p-1 rounded-top text-center">
+                                        @if (!string.IsNullOrEmpty(f.UrlFotoJugador))
+                                        {
+                                            <img src="~/img/@(f.NombreJugador).png" class="img-fluid rounded" style="height: 120px; object-fit: cover;" onerror="this.onerror=null;this.src='/img/default.png';" />
+                                        }
+                                        else
+                                        {
+                                            <img src="/img/default.png" class="img-fluid rounded" style="height: 120px; object-fit: cover;" />
+                                        }
+                                    </div>
+                                    <div class="p-2 text-center mt-auto">
+                                        <span class="badge bg-dark text-light mb-1 border">#@f.Numero</span>
+                                        <h6 class="text-truncate m-0 fw-bold" style="font-size: 0.85rem;" title="@f.NombreJugador">
+                                            @f.NombreJugador
+                                        </h6>
+                                    </div>
+                                </label>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
 
-</form>
+        <div class="card mb-4 shadow-sm border-warning bg-dark text-white">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="mb-0 fw-bold">2. Seleccioná la figurita que buscás (Tus Faltantes)</h5>
+            </div>
+            <div class="card-body" style="max-height: 500px; overflow-y: auto;">
+
+                @if (!Model.Faltantes.Any())
+                {
+                    <div class="alert alert-light text-center m-3">No tenés figuritas faltantes registradas.</div>
+                }
+                else
+                {
+                    <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3 text-center p-2">
+                        @foreach (var f in Model.Faltantes)
+                        {
+                            <div class="col">
+                                <input type="radio" class="btn-check" name="figuritaSolicitadaId" id="quiero_@f.Id" value="@f.Id" required autocomplete="off">
+
+                                <label class="btn btn-outline-warning text-white w-100 h-100 p-0 text-start border-2 shadow-sm d-flex flex-column" for="quiero_@f.Id">
+                                    <div class="bg-light p-1 rounded-top text-center">
+                                        @if (!string.IsNullOrEmpty(f.UrlFotoJugador))
+                                        {
+                                            <img src="~/img/@(f.NombreJugador).png" class="img-fluid rounded" style="height: 120px; object-fit: cover;" onerror="this.onerror=null;this.src='/img/default.png';" />
+                                        }
+                                        else
+                                        {
+                                            <img src="/img/default.png" class="img-fluid rounded" style="height: 120px; object-fit: cover;" />
+                                        }
+                                    </div>
+                                    <div class="p-2 text-center mt-auto">
+                                        <span class="badge bg-dark text-light mb-1 border">#@f.Numero</span>
+                                        <h6 class="text-truncate m-0 fw-bold" style="font-size: 0.85rem;" title="@f.NombreJugador">
+                                            @f.NombreJugador
+                                        </h6>
+                                    </div>
+                                </label>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="text-center mt-4 mb-5 pb-4">
+            <button type="submit" class="btn btn-primary btn-lg px-5 shadow-lg fw-bold" style="border-radius: 50px;">
+                Crear solicitud
+            </button>
+        </div>
+
+    </form>
+</div>

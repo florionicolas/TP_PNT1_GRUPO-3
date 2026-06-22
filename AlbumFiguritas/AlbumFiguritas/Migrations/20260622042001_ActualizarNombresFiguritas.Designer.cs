@@ -4,6 +4,7 @@ using AlbumFiguritas.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AlbumFiguritas.Migrations
 {
     [DbContext(typeof(AlbumDatabaseContext))]
-    partial class AlbumDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20260622042001_ActualizarNombresFiguritas")]
+    partial class ActualizarNombresFiguritas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,7 +43,6 @@ namespace AlbumFiguritas.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UrlFotoJugador")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -53,320 +55,280 @@ namespace AlbumFiguritas.Migrations
                             Id = 1,
                             NombreJugador = "Emiliano Martinez",
                             Numero = 1,
-                            Seleccion = 3,
-                            UrlFotoJugador = "img/Emiliano Martinez.png"
+                            Seleccion = 3
                         },
                         new
                         {
                             Id = 2,
                             NombreJugador = "Nahuel Molina",
                             Numero = 2,
-                            Seleccion = 3,
-                            UrlFotoJugador = "img/Nahuel Molina.png"
+                            Seleccion = 3
                         },
                         new
                         {
                             Id = 3,
                             NombreJugador = "Cristian Romero",
                             Numero = 3,
-                            Seleccion = 3,
-                            UrlFotoJugador = "img/Cristian Romero.png"
+                            Seleccion = 3
                         },
                         new
                         {
                             Id = 4,
                             NombreJugador = "Nicolas Otamendi",
                             Numero = 4,
-                            Seleccion = 3,
-                            UrlFotoJugador = "img/Nicolas Otamendi.png"
+                            Seleccion = 3
                         },
                         new
                         {
                             Id = 5,
                             NombreJugador = "Nicolas Tagliafico",
                             Numero = 5,
-                            Seleccion = 3,
-                            UrlFotoJugador = "img/Nicolas Tagliafico.png"
+                            Seleccion = 3
                         },
                         new
                         {
                             Id = 6,
                             NombreJugador = "Rodrigo De Paul",
                             Numero = 6,
-                            Seleccion = 3,
-                            UrlFotoJugador = "img/Rodrigo De Paul.png"
+                            Seleccion = 3
                         },
                         new
                         {
                             Id = 7,
                             NombreJugador = "Enzo Fernandez",
                             Numero = 7,
-                            Seleccion = 3,
-                            UrlFotoJugador = "img/Enzo Fernandez.png"
+                            Seleccion = 3
                         },
                         new
                         {
                             Id = 8,
                             NombreJugador = "Alexis Mac Allister",
                             Numero = 8,
-                            Seleccion = 3,
-                            UrlFotoJugador = "img/Alexis Mac Allister.png"
+                            Seleccion = 3
                         },
                         new
                         {
                             Id = 9,
                             NombreJugador = "Julian Alvarez",
                             Numero = 9,
-                            Seleccion = 3,
-                            UrlFotoJugador = "img/Julian Alvarez.png"
+                            Seleccion = 3
                         },
                         new
                         {
                             Id = 10,
                             NombreJugador = "Lionel Messi",
                             Numero = 10,
-                            Seleccion = 3,
-                            UrlFotoJugador = "img/Lionel Messi.png"
+                            Seleccion = 3
                         },
                         new
                         {
                             Id = 11,
                             NombreJugador = "Alisson Becker",
                             Numero = 11,
-                            Seleccion = 8,
-                            UrlFotoJugador = "img/Alisson Becker.png"
+                            Seleccion = 8
                         },
                         new
                         {
                             Id = 12,
                             NombreJugador = "Bruno Guimaraes",
                             Numero = 12,
-                            Seleccion = 8,
-                            UrlFotoJugador = "img/Bruno Guimaraes.png"
+                            Seleccion = 8
                         },
                         new
                         {
                             Id = 13,
                             NombreJugador = "Casemiro",
                             Numero = 13,
-                            Seleccion = 8,
-                            UrlFotoJugador = "img/Casemiro.png"
+                            Seleccion = 8
                         },
                         new
                         {
                             Id = 14,
                             NombreJugador = "Danilo",
                             Numero = 14,
-                            Seleccion = 8,
-                            UrlFotoJugador = "img/Danilo.png"
+                            Seleccion = 8
                         },
                         new
                         {
                             Id = 15,
                             NombreJugador = "Lucas Paqueta",
                             Numero = 15,
-                            Seleccion = 8,
-                            UrlFotoJugador = "img/Lucas Paqueta.png"
+                            Seleccion = 8
                         },
                         new
                         {
                             Id = 16,
                             NombreJugador = "Marquinhos",
                             Numero = 16,
-                            Seleccion = 8,
-                            UrlFotoJugador = "img/Marquinhos.png"
+                            Seleccion = 8
                         },
                         new
                         {
                             Id = 17,
                             NombreJugador = "Mateus Cunha",
                             Numero = 17,
-                            Seleccion = 8,
-                            UrlFotoJugador = "img/Mateus Cunha.png"
+                            Seleccion = 8
                         },
                         new
                         {
                             Id = 18,
                             NombreJugador = "Raphinha",
                             Numero = 18,
-                            Seleccion = 8,
-                            UrlFotoJugador = "img/Raphinha.png"
+                            Seleccion = 8
                         },
                         new
                         {
                             Id = 19,
                             NombreJugador = "Vinicius Junior",
                             Numero = 19,
-                            Seleccion = 8,
-                            UrlFotoJugador = "img/Vinicius Junior.png"
+                            Seleccion = 8
                         },
                         new
                         {
                             Id = 20,
                             NombreJugador = "Wesley",
                             Numero = 20,
-                            Seleccion = 8,
-                            UrlFotoJugador = "img/Wesley.png"
+                            Seleccion = 8
                         },
                         new
                         {
                             Id = 21,
                             NombreJugador = "Aurelien Tchouameni",
                             Numero = 21,
-                            Seleccion = 22,
-                            UrlFotoJugador = "img/Aurelien Tchouameni.png"
+                            Seleccion = 22
                         },
                         new
                         {
                             Id = 22,
                             NombreJugador = "Dayot Upamecano",
                             Numero = 22,
-                            Seleccion = 22,
-                            UrlFotoJugador = "img/Dayot Upamecano.png"
+                            Seleccion = 22
                         },
                         new
                         {
                             Id = 23,
                             NombreJugador = "Desire Doue",
                             Numero = 23,
-                            Seleccion = 22,
-                            UrlFotoJugador = "img/Desire Doue.png"
+                            Seleccion = 22
                         },
                         new
                         {
                             Id = 24,
                             NombreJugador = "Eduardo Camavinga",
                             Numero = 24,
-                            Seleccion = 22,
-                            UrlFotoJugador = "img/Eduardo Camavinga.png"
+                            Seleccion = 22
                         },
                         new
                         {
                             Id = 25,
                             NombreJugador = "Ibrahima Konate",
                             Numero = 25,
-                            Seleccion = 22,
-                            UrlFotoJugador = "img/Ibrahima Konate.png"
+                            Seleccion = 22
                         },
                         new
                         {
                             Id = 26,
-                            NombreJugador = "Kingsley Coman",
+                            NombreJugador = "Kingsley Koman",
                             Numero = 26,
-                            Seleccion = 22,
-                            UrlFotoJugador = "img/Kingsley Koman.png"
+                            Seleccion = 22
                         },
                         new
                         {
                             Id = 27,
                             NombreJugador = "Kylian Mbappe",
                             Numero = 27,
-                            Seleccion = 22,
-                            UrlFotoJugador = "img/Kylian Mbappe.png"
+                            Seleccion = 22
                         },
                         new
                         {
                             Id = 28,
                             NombreJugador = "Mike Maignan",
                             Numero = 28,
-                            Seleccion = 22,
-                            UrlFotoJugador = "img/Mike Maignan.png"
+                            Seleccion = 22
                         },
                         new
                         {
                             Id = 29,
                             NombreJugador = "Ousmane Dembele",
                             Numero = 29,
-                            Seleccion = 22,
-                            UrlFotoJugador = "img/Ousmane Dembele.png"
+                            Seleccion = 22
                         },
                         new
                         {
                             Id = 30,
                             NombreJugador = "Theo Hernandez",
                             Numero = 30,
-                            Seleccion = 22,
-                            UrlFotoJugador = "img/Theo Hernandez.png"
+                            Seleccion = 22
                         },
                         new
                         {
                             Id = 31,
                             NombreJugador = "Alexander Arnold",
                             Numero = 31,
-                            Seleccion = 25,
-                            UrlFotoJugador = "img/Alexander Arnold.png"
+                            Seleccion = 25
                         },
                         new
                         {
                             Id = 32,
                             NombreJugador = "Declan Rice",
                             Numero = 32,
-                            Seleccion = 25,
-                            UrlFotoJugador = "img/Declan Rice.png"
+                            Seleccion = 25
                         },
                         new
                         {
                             Id = 33,
                             NombreJugador = "Ezri Konsa",
                             Numero = 33,
-                            Seleccion = 25,
-                            UrlFotoJugador = "img/Ezri Konsa.png"
+                            Seleccion = 25
                         },
                         new
                         {
                             Id = 34,
                             NombreJugador = "Harry Kane",
                             Numero = 34,
-                            Seleccion = 25,
-                            UrlFotoJugador = "img/Harry Kane.png"
+                            Seleccion = 25
                         },
                         new
                         {
                             Id = 35,
                             NombreJugador = "John Stones",
                             Numero = 35,
-                            Seleccion = 25,
-                            UrlFotoJugador = "img/John Stones.png"
+                            Seleccion = 25
                         },
                         new
                         {
                             Id = 36,
                             NombreJugador = "Jordan Henderson",
                             Numero = 36,
-                            Seleccion = 25,
-                            UrlFotoJugador = "img/Jordan Henderson.png"
+                            Seleccion = 25
                         },
                         new
                         {
                             Id = 37,
                             NombreJugador = "Jordan Pickford",
                             Numero = 37,
-                            Seleccion = 25,
-                            UrlFotoJugador = "img/Jordan Pickford.png"
+                            Seleccion = 25
                         },
                         new
                         {
                             Id = 38,
                             NombreJugador = "Jude Bellingham",
                             Numero = 38,
-                            Seleccion = 25,
-                            UrlFotoJugador = "img/Jude Bellingham.png"
+                            Seleccion = 25
                         },
                         new
                         {
                             Id = 39,
                             NombreJugador = "Phil Foden",
                             Numero = 39,
-                            Seleccion = 25,
-                            UrlFotoJugador = "img/Phil Foden.png"
+                            Seleccion = 25
                         },
                         new
                         {
                             Id = 40,
                             NombreJugador = "Reece James",
                             Numero = 40,
-                            Seleccion = 25,
-                            UrlFotoJugador = "img/Reece James.png"
+                            Seleccion = 25
                         });
                 });
 
